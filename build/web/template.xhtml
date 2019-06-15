@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Laundry</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"></link>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+        
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        
+        <style>
+            .menu.themed > *, .themed {
+                color: rgb(146, 180, 242) !important;
+            }
+            
+            .item.themed, .item > a {
+                padding-right: 25px !important;
+                padding-left: 25px !important;
+                color: rgb(146, 180, 242) !important;
+                font-size: 16px;
+            }
+
+            
+            #body-content {
+                padding-top: 30px;
+                background-color: rgb(244, 246, 250) !important;
+            }
+            
+            .themed-header {
+                color: rgb(146, 180, 242) !important;
+                text-align: center;
+            }
+            
+        </style>
+    </h:head>
+   
+    <h:body>
+        <div id="header">
+            
+            <div class="ui secondary pointing menu">
+                
+                <h:link class="item themed" outcome="/index" value="Home" />
+                
+                <h:link class="item themed" outcome="/orders/index" value="Entregas" rendered="#{authorizationMB.user.admin}"/>
+                <h:link class="item themed" outcome="/users/index" value="Usuários" rendered="#{authorizationMB.user.admin}"/>
+                <h:link class="item themed" outcome="/vestures/index" value="Tipos de Roupa" rendered="#{authorizationMB.user.admin}"/>
+                <h:link class="item themed" outcome="/reports/index" value="Relatórios" rendered="#{authorizationMB.user.admin}"/>
+                
+                <h:link class="item themed" outcome="/orders/my_orders?faces-redirect=true" value="Minhas Encomendas" rendered="#{!authorizationMB.user.admin}" />
+                
+                <div class="right menu">
+                    
+                    <div class="item">
+                        <i class="ui user outline icon themed"></i>  
+                       #{authorizationMB.user.name}
+                    </div>
+                    
+                    <h:form rendered="#{authorizationMB.logged}" class="item">
+                        <h:commandLink  class="themed" action="#{authorizationMB.logout}" value="Logout"/>
+                    </h:form>
+                    
+                    <h:link class="ui item themed" outcome="/users/login" value="Login" rendered="#{!authorizationMB.logged}"/>
+                </div>
+             </div>
+        </div>
+        <div id="body-content">
+            <div class="ui container"  style="height: 100%">
+                <ui:insert name="body">Template default content...</ui:insert>
+            </div>
+        </div>
+    </h:body>
+</html>

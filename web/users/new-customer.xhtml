@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+    <h:head>
+        <title>Laundry</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"></link>
+        
+        
+        <style>
+            .menu.themed > *, .themed {
+                color: rgb(146, 180, 242) !important;
+            }
+            
+            .item.themed, .item > a {
+                padding-right: 25px !important;
+                padding-left: 25px !important;
+                color: rgb(146, 180, 242) !important;
+                font-size: 16px;
+            }
+
+            
+            #body-content {
+                padding-top: 30px;
+                background-color: rgb(244, 246, 250) !important;
+            }
+            
+            .themed-header {
+                color: rgb(146, 180, 242) !important;
+                text-align: center;
+            }
+            
+        </style>
+        
+    </h:head>
+    
+    <h:body>
+        <div id="header">
+            <div class="ui secondary pointing menu">
+                <h:link class="item themed" outcome="/users/login" value="Já tenho uma conta" />
+             </div>
+        </div>
+        
+        <div id="body-content" style="height: 100%">
+            <div class="ui container" >
+                
+                <h:form class="ui form">
+                    <div class="field">
+                        <h:outputLabel value="Nome" for="nome" />
+                        <h:inputText value="#{userMB.user.name}" id="nome" />
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Email" for="email" />
+                        <h:inputText value="#{userMB.user.email}" id="email" />
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Senha" for="senha" />
+                        <h:inputSecret value="#{userMB.user.password}" id="senha" />
+                    </div>
+                    
+                    <div class="field">
+                        <h:outputLabel value="Sexo" for="sex" />
+
+                        <h:selectOneMenu id="sex" value="#{userMB.user.sex}" class="ui dropdown">
+                            <f:selectItem id="M" itemLabel="Masculino" itemValue="M" />
+                            <f:selectItem id="F" itemLabel="Feminino" itemValue="F" />
+                        </h:selectOneMenu>
+                    </div>
+                    
+
+                    <div class="field">
+                        <h:outputLabel value="Documento" for="document" />
+                        <h:inputSecret value="#{userMB.user.document}" id="document" />
+                    </div>
+                    
+                    <div class="field">
+                        <h:outputLabel value="Telefone" for="phone" />
+                        <h:inputSecret value="#{userMB.user.phone}" id="phone" />
+                    </div>
+
+                    <h:commandButton value="Salvar" action="#{userMB.saveCustomer()}"/>
+                </h:form>
+                
+            </div>
+        </div>
+    </h:body>
+</html> 

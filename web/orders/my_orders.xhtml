@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <ui:define name="body">
+        <h1 class="themed-header">Minhas Entregas</h1>
+        <br/>
+        
+        <h:form>
+            <h:inputHidden id="reason" value="#{myOrderMB.reason}" />
+            
+            <h:dataTable value="#{myOrderMB.orders}" var="order" class="ui very basic celled table">
+               <h:column>
+                    <f:facet name="header">Status</f:facet>#{order.status}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Prazo</f:facet>
+                    <h:outputText value="#{order.deadline}">
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Preço</f:facet>#{order.price}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Ações</f:facet>
+
+                    <h:commandLink  action="#{orderMB.show(order.id)}">
+                        <i class="ui eye grey icon"></i>
+                    </h:commandLink>
+
+                    <h:commandLink action="#{myOrderMB.deliver(order.id)}" 
+                                   rendered="#{order.shipping}"
+                                   class="deliver-order">
+
+                        <i class="ui check green icon"></i>
+                    </h:commandLink>
+
+                    <h:commandLink action="#{myOrderMB.leave(order.id)}" 
+                                   rendered="#{order.shipping}"
+                                   a:data-id="#{order.id}"
+                                   class="cancel-order-link">
+
+                        <i class="ui remove red icon"></i>
+                    </h:commandLink>
+
+                </h:column>
+            </h:dataTable>
+        </h:form> 
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+   
+    <h:head>
+        <title>Laundry</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"></link>
+    </h:head>
+    
+    <body>
+        <div class="ui centered very relaxed stackable grid" style="margin-top: 30vh !important;">
+            <h:form class="ui four wide column form segment">
+
+                <div class="field">
+                    <h:outputLabel value="Email" for="email" />
+                    <div class="ui left icon input">
+                        <h:inputText value="#{authorizationMB.user.email}" id="email" />
+                        <i class="user icon"></i>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <h:outputLabel value="Senha" for="senha" />
+                    <div class="ui left icon input">
+                        <h:inputSecret value="#{authorizationMB.user.password}" id="senha" />
+                        <i class="lock icon"></i>
+                    </div>
+                </div>
+                
+                <h:commandButton value="Entrar" action="#{authorizationMB.login}" class="fluid ui blue button"/>
+                <br/>
+                
+                <h:link value="Inscrever-se" outcome="/users/new-customer" class="fluid ui green button"/>
+            </h:form>
+        </div>
+    </body>
+</html> 

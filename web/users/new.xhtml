@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="body">
+        <h1 class="themed-header">Novo Usuário</h1>
+        
+        <h:form class="ui form">
+            <div class="field">
+                <h:outputLabel value="Função" for="role" />
+                
+                <h:selectOneMenu id="role" value="#{userMB.user.role}" class="ui dropdown">
+                    <f:selectItem id="deliver" itemLabel="Entregador" itemValue="deliver" />
+                    <f:selectItem id="admin" itemLabel="Admin" itemValue="admin" />
+                </h:selectOneMenu>
+            </div>
+            
+            <div class="field">
+                <h:outputLabel value="Nome" for="nome" />
+                <h:inputText value="#{userMB.user.name}" id="nome" />
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Email" for="email" />
+                <h:inputText value="#{userMB.user.email}" id="email" />
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Senha" for="senha" />
+                <h:inputSecret value="#{userMB.user.password}" id="senha" />
+            </div>
+            
+            <br/>
+
+            <div class="ui horizontal divider">
+                Endereço
+            </div>
+                                
+            <div class="field">
+                <h:outputLabel value="Estado" for="selectState" />
+                <h:selectOneMenu id="selectState"
+                    class="ui dropdown"
+                    value="#{addressMB.stateId}">
+
+                    <f:selectItem itemLabel="Selecione" itemValue=""/>
+
+                    <f:selectItems value="#{addressMB.states}"
+                        var="state"
+                        itemLabel="#{state.name}"
+                        itemValue="#{state.id}"/>
+
+                    <f:ajax event="change"
+                        execute="selectState"
+                        render="selectCity"
+                        listener="#{addressMB.fetchCities}" />
+                </h:selectOneMenu>
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Cidade" for="selectCity" />
+                <h:selectOneMenu id="selectCity"
+                    class="ui dropdown"
+                    value="#{userMB.cityId}">
+
+                    <f:selectItem itemLabel="Selecione" itemValue=""/>
+
+                    <f:selectItems value="#{addressMB.cities}"
+                        var="city"
+                        itemLabel="#{city.name}"
+                        itemValue="#{city.id}"/>
+                </h:selectOneMenu>
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Rua" for="street" />
+                <h:inputText value="#{userMB.user.address.street}" id="street" />
+            </div>
+
+            <h:commandButton value="Salvar" action="#{userMB.save}"/>
+        </h:form>
+              
+    </ui:define>
+</ui:composition>

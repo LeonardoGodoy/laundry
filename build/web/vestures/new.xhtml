@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="body">
+        <h1 class="themed-header">Novo Tipo de Roupa</h1>
+        
+        <h:form class="ui form">            
+            <div class="field">
+                <h:outputLabel value="Descrição" for="description" />
+                <h:inputText value="#{vestureMB.vesture.description}" id="description" />
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Preço" for="price" />
+                <h:inputText value="#{vestureMB.vesture.price}" id="price" />
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Daias necessários" for="days" />
+                <h:inputSecret value="#{vestureMB.vesture.days}" id="days" />
+            </div>
+            
+            <br/>
+
+            <h:commandButton value="Salvar" action="#{vestureMB.save}"/>
+        </h:form>
+              
+    </ui:define>
+</ui:composition>

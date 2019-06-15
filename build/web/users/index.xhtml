@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="body">
+        <h1 class="themed-header">Usuários</h1>
+        <h:link outcome="/users/new" value="Novo Usuário"/>
+        
+        <h:form>
+            <h:dataTable value="#{userMB.users}" var="user" class="ui very basic celled table">
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>#{user.name}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Email</f:facet>#{user.email}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Ações</f:facet>
+
+                    <h:commandLink  action="#{userMB.show(user)}">
+                        <i class="ui eye grey icon"></i>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <i class="ui remove red icon"></i>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
