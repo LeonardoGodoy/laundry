@@ -107,13 +107,6 @@ public class OrderFacade {
         }
     }
     
-    public static void paidOrder(Order order) {
-        order.setPaymentDate(new Date());
-        saveOrder(order);
-    }
-    
-    
-    
     public static void saveOrder(Order order) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -122,11 +115,6 @@ public class OrderFacade {
         
         transaction.commit();
         session.close();
-    }
-
-    public static void cancelOrder(Order order, String reason) {
-        order.setStatus("Cancelado");
-        saveOrder(order);
     }
 
     public static Order findOrderByExternalReference(String id) {
@@ -142,5 +130,15 @@ public class OrderFacade {
         session.getTransaction().commit();
         session.close();
         return order;
+    }
+    
+    public static void paidOrder(Order order) {
+        order.setPaymentDate(new Date());
+        saveOrder(order);
+    }
+        
+    public static void cancelOrder(Order order) {
+        order.setStatus("Cancelado");
+        saveOrder(order);
     }
 }

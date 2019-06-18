@@ -9,21 +9,14 @@
         <h1 class="themed-header">Exibir Encomenda</h1>
         
         <h:panelGrid columns="2">
-            <h:outputLabel value="Status " /> #{orderMB.order.status}
+            <h:outputLabel value="Status: " /> #{orderMB.order.status}
             
             <h:outputLabel value="Destinatário: " /> #{orderMB.order.user.name}
             
             <h:outputLabel value="Descrição: " /> #{orderMB.order.description}
             
-            <h:outputLabel value="Preço Total: " /> #{orderMB.order.price}
-            
             <h:outputLabel value="Data Limite: " />
             <h:outputText value="#{orderMB.order.deadline}">
-                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-            </h:outputText>
-            
-            <h:outputLabel value="Pago em: " />
-            <h:outputText value="#{orderMB.order.paymentDate}">
                 <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
             </h:outputText>
             
@@ -43,7 +36,7 @@
             <div class="six wide column">
                 <h:dataTable value="#{orderMB.order.vestures}" var="vesture" class="ui very basic celled table">              
                    <h:column>
-                       <f:facet name="header">Dias Necessários</f:facet>#{vesture.days}
+                       <f:facet name="header">Dias Necessários</f:facet>#{vesture.days} dias
                    </h:column>
 
                     <h:column>
@@ -51,11 +44,31 @@
                    </h:column>
 
                     <h:column>
-                        <f:facet name="header">Preço</f:facet>#{vesture.price}
+                        <f:facet name="header">Preço</f:facet>
+                        <h:outputText value="#{vesture.price}">
+                            <f:convertNumber type="currency" locale="pt_BR"/>
+                        </h:outputText>
                    </h:column>
                 </h:dataTable>
             </div>
         </div>
+        
+        <h3>
+            <h:outputLabel value="Preço Total: " />
+            <h:outputText value="#{orderMB.order.price}">
+                <f:convertNumber type="currency" locale="pt_BR"/>
+            </h:outputText>
+        </h3>
+        
+        <h5>
+            <h:outputLabel value="Pagamento " rendered="#{!orderMB.order.paid}" />
+            <h:outputText value="#{orderMB.order.paymentStatus} "/>
+            <h:outputText value="#{orderMB.order.paymentDate}" rendered="#{orderMB.order.paid}">
+                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+            
+        </h5>
+        
 
     </ui:define>
 </ui:composition>

@@ -155,6 +155,21 @@ public class Order implements Serializable {
     }
     
     @Transient
+    public boolean isPaid() {
+        return this.paymentDate != null;
+    }
+    
+    @Transient
+    public boolean isCanceled() {
+        return this.status.equals("Cancelado");
+    }
+    
+    @Transient
+    public String getPaymentStatus() {
+        return isPaid() ? "Pago" : "Pendente";
+    }
+    
+    @Transient
     public String getDescription(){
         Integer size = getVestures().size();
         return size + " peças de roupa.";

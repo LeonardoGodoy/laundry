@@ -26,7 +26,15 @@
                 </h:column>
                 
                 <h:column>
-                    <f:facet name="header">Preço</f:facet>#{order.price}
+                    <f:facet name="header">Preço</f:facet>
+                    <h:outputText value="#{order.price}">
+                        <f:convertNumber type="currency" locale="pt_BR"/>
+                    </h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Pagamento</f:facet>
+                    #{order.paymentStatus}
                 </h:column>
 
                 <h:column>
@@ -36,15 +44,8 @@
                         <i class="ui eye grey icon"></i>
                     </h:commandLink>
 
-                    <h:commandLink action="#{myOrderMB.deliver(order.id)}" 
-                                   rendered="#{order.shipping}"
-                                   class="deliver-order">
-
-                        <i class="ui check green icon"></i>
-                    </h:commandLink>
-
-                    <h:commandLink action="#{myOrderMB.leave(order.id)}" 
-                                   rendered="#{order.shipping}"
+                    <h:commandLink action="#{myOrderMB.cancel(order.id)}" 
+                                   rendered="#{!order.paid and order.waiting}"
                                    a:data-id="#{order.id}"
                                    class="cancel-order-link">
 

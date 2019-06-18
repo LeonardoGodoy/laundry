@@ -55,9 +55,8 @@ public class OrderMB implements Serializable {
         
     public String cancel(Integer id) {
         getOrderById(id);
-        String reason = "Setar motivo...";
         
-        OrderFacade.cancelOrder(order, reason);
+        OrderFacade.cancelOrder(order);
         return "/orders/index?faces-redirect=true";
     }
 

@@ -28,21 +28,14 @@ public class MyOrderMB {
         vestures = new ArrayList<Vesture>();
     }
     
-
     public String show(Integer id) {
         getOrderById(id);
         return "/orders/show";
     }
-        
-    public String leave(Integer id) {
-        getOrderById(id);
-        //OrderFacade.leaveOrder(this.order, this.reason);
-        return "/orders/my_orders?faces-redirect=true";
-    }
     
-    public String deliver(Integer id) {
+    public String cancel(Integer id) {
         getOrderById(id);
-        //OrderFacade.deliverOrder(this.order);
+        OrderFacade.cancelOrder(this.order);
         return "/orders/my_orders?faces-redirect=true";
     }
     
