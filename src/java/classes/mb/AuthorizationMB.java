@@ -3,6 +3,8 @@ package classes.mb;
 import classes.facade.UserFacade;
 import classes.model.User;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.Application;
@@ -27,12 +29,13 @@ public class AuthorizationMB implements Serializable {
     }   
     
     public String login() {
+
         Integer id = Integer.parseInt(user.getEmail());
-        
         User user = UserFacade.findUserById(id);
-        System.out.println(user);
         
-        if (true) {
+//        User user = UserFacade.findUserByCredentials(this.user.getEmail(), this.user.getPassword());
+        
+        if (user != null) {
             this.user = user;
             return "/index?faces-redirect=true";
         } else {
