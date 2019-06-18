@@ -99,7 +99,7 @@ public class OrderFacade {
         try {
             DeliveryOrderDao.sendOrder(order);
             // order.setStatus("Pronto"); // Aguardando entrega...
-            // saveOrder(order);
+            saveOrder(order);
             
         } catch (Exception exception) {
             
@@ -128,5 +128,19 @@ public class OrderFacade {
         order.setStatus("Cancelado");
         saveOrder(order);
     }
-    
+
+    public static Order findOrderByExternalReference(String id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        
+        String hql = "from Order where external_reference = :external_reference";    
+        Query select = session.createQuery(hql);
+        select.setParameter("external_reference", id);
+        
+        Order order = (Order) select.uniqueResult();
+        
+        session.getTransaction().commit();
+        session.close();
+        return order;
+    }
 }

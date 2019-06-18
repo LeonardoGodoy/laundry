@@ -3,12 +3,59 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <ui:define name="body">
         <h1 class="themed-header">Exibir Encomenda</h1>
+        
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Status " /> #{orderMB.order.status}
+            
+            <h:outputLabel value="Destinatário: " /> #{orderMB.order.user.name}
+            
+            <h:outputLabel value="Descrição: " /> #{orderMB.order.description}
+            
+            <h:outputLabel value="Preço Total: " /> #{orderMB.order.price}
+            
+            <h:outputLabel value="Data Limite: " />
+            <h:outputText value="#{orderMB.order.deadline}">
+                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+            
+            <h:outputLabel value="Pago em: " />
+            <h:outputText value="#{orderMB.order.paymentDate}">
+                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+            
+            <h:outputLabel value="Criado em: " /> 
+            <h:outputText value="#{orderMB.order.createdAt}">
+                <f:convertDateTime type="date" pattern="dd/MM/yyyy hh:mm"/>
+            </h:outputText>
+            
+            <h:outputLabel value="Endereço" />  #{orderMB.order.address.street},  #{orderMB.order.address.number}, #{orderMB.order.address.city.name} / #{orderMB.order.address.city.state.name}
+            
+        </h:panelGrid>
+        
+        <br/>
+        <br/>
+        
+        <div class="ui grid">
+            <div class="six wide column">
+                <h:dataTable value="#{orderMB.order.vestures}" var="vesture" class="ui very basic celled table">              
+                   <h:column>
+                       <f:facet name="header">Dias Necessários</f:facet>#{vesture.days}
+                   </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Tipo</f:facet>#{vesture.description}
+                   </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Preço</f:facet>#{vesture.price}
+                   </h:column>
+                </h:dataTable>
+            </div>
+        </div>
 
     </ui:define>
 </ui:composition>
