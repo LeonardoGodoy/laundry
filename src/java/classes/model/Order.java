@@ -165,6 +165,11 @@ public class Order implements Serializable {
     }
     
     @Transient
+    public boolean isExported() {
+        return this.externalReference != null;
+    }
+    
+    @Transient
     public String getPaymentStatus() {
         return isPaid() ? "Pago" : "Pendente";
     }
