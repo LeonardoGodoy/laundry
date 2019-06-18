@@ -63,10 +63,9 @@ create table tb_user (
   FOREIGN KEY (address_id) REFERENCES tb_address(id)
 );
 
-insert into tb_user(role, name, email, password, sex, document, phone, address_id ) values ('admin', 'Admin Default' , 'admin@gmail.com', '12341234', 'M', 'document', 'phone', 1);
-insert into tb_user(role, name, email, password, sex, document, phone, address_id) values ('customer', 'Customer Default' , 'customer@gmail.com', '12341234', 'M', 'document', 'phone', 2);
-insert into tb_user(role, name, email, password, sex, document, phone, address_id) values ('customer', 'Isadora Velasques' , 'isadoravelasques@gmail.com', '12341234', 'M', 'document', 'phone', 3);
-
+insert into tb_user(role, name, email, password, sex, document, phone, address_id ) values ('admin', 'Admin Default' , 'admin@gmail.com', md5('123123'), 'M', 'document', 'phone', 1);
+insert into tb_user(role, name, email, password, sex, document, phone, address_id) values ('customer', 'Customer Default' , 'customer@gmail.com', md5('123123'), 'M', 'document', 'phone', 2);
+insert into tb_user(role, name, email, password, sex, document, phone, address_id) values ('customer', 'Isadora Velasques' , 'isadoravelasques@gmail.com', md5('123123'), 'M', 'document', 'phone', 3);
 
 
 create table tb_order (
@@ -107,20 +106,19 @@ create table tb_order_item (
   id SERIAL PRIMARY KEY,
   vesture_id INTEGER,
   order_id INTEGER,
-  description VARCHAR(100),
   FOREIGN KEY (order_id) REFERENCES tb_order(id),
   FOREIGN KEY (vesture_id) REFERENCES tb_vesture(id)
 );
 
-insert into tb_order_item(vesture_id, order_id, description) values (1, 1, 'Descrição');
-insert into tb_order_item(vesture_id, order_id, description) values (2, 1, 'Descrição');
-insert into tb_order_item(vesture_id, order_id, description) values (3, 1, 'Descrição');
-insert into tb_order_item(vesture_id, order_id, description) values (4, 1, 'Descrição');
+insert into tb_order_item(vesture_id, order_id) values (1, 1);
+insert into tb_order_item(vesture_id, order_id) values (2, 1);
+insert into tb_order_item(vesture_id, order_id) values (3, 1);
+insert into tb_order_item(vesture_id, order_id) values (4, 1);
 
-insert into tb_order_item(vesture_id, order_id, description) values (5, 2, 'Descrição');
-insert into tb_order_item(vesture_id, order_id, description) values (6, 2, 'Descrição');
-insert into tb_order_item(vesture_id, order_id, description) values (7, 2, 'Descrição');
-insert into tb_order_item(vesture_id, order_id, description) values (8, 2, 'Descrição');
+insert into tb_order_item(vesture_id, order_id) values (5, 2);
+insert into tb_order_item(vesture_id, order_id) values (6, 2);
+insert into tb_order_item(vesture_id, order_id) values (7, 2);
+insert into tb_order_item(vesture_id, order_id) values (8, 2);
 
-insert into tb_order_item(vesture_id, order_id, description) values (2, 3, 'Descrição');
-insert into tb_order_item(vesture_id, order_id, description) values (4, 3, 'Descrição');
+insert into tb_order_item(vesture_id, order_id) values (2, 3);
+insert into tb_order_item(vesture_id, order_id) values (4, 3);
