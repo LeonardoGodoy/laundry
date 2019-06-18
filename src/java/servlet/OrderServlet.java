@@ -30,7 +30,7 @@ public class OrderServlet extends HttpServlet {
             JSONObject params = new JSONObject(payloadRequest);
             
             Order order = new UpdateOrderUtil(params).getOrder();
-            // OrderFacade.saveOrder(order);
+            OrderFacade.saveOrder(order);
             
             try (PrintWriter out = response.getWriter()) {
                 response.setContentType("application/json");

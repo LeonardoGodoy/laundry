@@ -28,9 +28,7 @@ public class UpdateOrderUtil {
         Order order = OrderFacade.findOrderByExternalReference(id);
         if(order == null) { return null; }
         
-        order.setStatus(status);
-        // MUDAR STATUS POR FACADE PARA MANTER HISTORICO
-        
+        order.setStatus(status);        
         System.out.println(order);
         
         return order;

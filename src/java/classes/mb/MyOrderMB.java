@@ -39,14 +39,6 @@ public class MyOrderMB {
         return "/orders/my_orders?faces-redirect=true";
     }
     
-    public void test(){
-        Vesture v = new Vesture();
-        v.setDays(3);
-        v.setDescription("Teste");
-        v.setPrice(new BigDecimal(200.0));
-        vestures.add(v);
-    }
-
     public Order getOrder() {
         return order;
     }
