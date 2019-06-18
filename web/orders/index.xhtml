@@ -50,6 +50,20 @@
                 <h:column rendered="#{authorizationMB.user.admin}">
                     <f:facet name="header">Ações</f:facet>
 
+                    <h:commandLink action="#{orderMB.ready(order.id)}" 
+                                   a:data-id="#{order.id}"
+                                   value="Pronto"
+                                   class="ui primary mini basic button">
+                        </h:commandLink>
+
+                        
+                    <h:commandLink action="#{orderMB.paid(order.id)}" 
+                                   a:data-id="#{order.id}"
+                                   value="Pago"
+                                   class="ui secundary mini basic button">
+                        
+                    </h:commandLink>
+                    
                     <h:commandLink  action="#{orderMB.show(order.id)}">
                         <i class="ui eye grey icon"></i>
                     </h:commandLink>
@@ -59,6 +73,7 @@
                                    class="cancel-order">
                         <i class="ui trash alternate outline red icon"></i>
                     </h:commandLink>
+                    
                 </h:column>
             </h:dataTable>
         </h:form> 

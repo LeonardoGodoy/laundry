@@ -13,8 +13,8 @@
                 <h:outputLabel value="Função" for="role" />
                 
                 <h:selectOneMenu id="role" value="#{userMB.user.role}" class="ui dropdown">
-                    <f:selectItem id="deliver" itemLabel="Entregador" itemValue="deliver" />
-                    <f:selectItem id="admin" itemLabel="Admin" itemValue="admin" />
+                    <f:selectItem id="customer" itemLabel="Cliente" itemValue="customer" />
+                    <f:selectItem id="admin" itemLabel="Funcionário" itemValue="admin" />
                 </h:selectOneMenu>
             </div>
             
@@ -76,7 +76,12 @@
 
             <div class="field">
                 <h:outputLabel value="Rua" for="street" />
-                <h:inputText value="#{userMB.user.address.street}" id="street" />
+                <h:inputText value="#{userMB.address.street}" id="street" />
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Número" for="number" />
+                <h:inputText value="#{userMB.address.number}" id="number" />
             </div>
 
             <h:commandButton value="Salvar" action="#{userMB.save}"/>

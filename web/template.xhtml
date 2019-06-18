@@ -53,6 +53,7 @@
                 <h:link class="item themed" outcome="/reports/index" value="Relatórios" rendered="#{authorizationMB.user.admin}"/>
                 
                 <h:link class="item themed" outcome="/orders/my_orders?faces-redirect=true" value="Minhas Encomendas" rendered="#{!authorizationMB.user.admin}" />
+                <h:link class="item themed" outcome="/orders/new?faces-redirect=true" value="Nova Encomenda" rendered="#{!authorizationMB.user.admin}" />
                 
                 <div class="right menu">
                     

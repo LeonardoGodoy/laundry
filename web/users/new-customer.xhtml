@@ -88,6 +88,55 @@ and open the template in the editor.
                         <h:inputSecret value="#{userMB.user.phone}" id="phone" />
                     </div>
 
+                     <div class="ui horizontal divider">
+                        Endereço
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Estado" for="selectState" />
+                        <h:selectOneMenu id="selectState"
+                            class="ui dropdown"
+                            value="#{addressMB.stateId}">
+
+                            <f:selectItem itemLabel="Selecione" itemValue=""/>
+
+                            <f:selectItems value="#{addressMB.states}"
+                                var="state"
+                                itemLabel="#{state.name}"
+                                itemValue="#{state.id}"/>
+
+                            <f:ajax event="change"
+                                execute="selectState"
+                                render="selectCity"
+                                listener="#{addressMB.fetchCities}" />
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Cidade" for="selectCity" />
+                        <h:selectOneMenu id="selectCity"
+                            class="ui dropdown"
+                            value="#{userMB.cityId}">
+
+                            <f:selectItem itemLabel="Selecione" itemValue=""/>
+
+                            <f:selectItems value="#{addressMB.cities}"
+                                var="city"
+                                itemLabel="#{city.name}"
+                                itemValue="#{city.id}"/>
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="field">
+                        <h:outputLabel value="Rua" for="street" />
+                        <h:inputText value="#{userMB.address.street}" id="street" />
+                    </div>
+                    
+                    <div class="field">
+                        <h:outputLabel value="Número" for="number" />
+                        <h:inputText value="#{userMB.address.number}" id="number" />
+                    </div>
+
                     <h:commandButton value="Salvar" action="#{userMB.saveCustomer()}"/>
                 </h:form>
                 

@@ -1,10 +1,13 @@
 package classes.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -22,7 +25,9 @@ public class User implements Serializable {
     private String sex;
     private String document;
     private String phone;
-    private String registration;          
+    private String registration; 
+    
+    private Address address;
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
@@ -97,11 +102,32 @@ public class User implements Serializable {
     public void setRegistration(String registration) {
         this.registration = registration;
     }
+   
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="address_id")
+    //@Transient
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
+    
     
     @Transient
     public boolean isAdmin() {
         return this.role.equals("admin");
     }  
+    
+    @Transient
+    public String getReadableRole(){
+        if(isAdmin()){
+            return "Funcionário";
+        }
+        return "Cliente";
+    }
     
     @Override
     public String toString() {

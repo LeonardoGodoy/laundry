@@ -51,8 +51,8 @@ public class Vesture implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    } 
-    
+    }
+        
     @Override
     public String toString() {
         return "\n" + 
@@ -60,6 +60,10 @@ public class Vesture implements Serializable {
         "price: " + getPrice() + "\n" +
         "days: " + getDays()+ "\n" +
         "description: " + getDescription() + "\n";
+    }
+
+    public void setPrice(double d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
   
 }

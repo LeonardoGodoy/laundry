@@ -3,6 +3,9 @@ package classes.mb;
 import classes.facade.OrderFacade;
 import classes.model.Order;
 import classes.model.User;
+import classes.model.Vesture;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -14,6 +17,7 @@ public class MyOrderMB {
     
     private Order order;
     private List<Order> orders;
+    private List<Vesture> vestures;
     private String reason;
             
     @PostConstruct
@@ -21,6 +25,7 @@ public class MyOrderMB {
         User user = AuthorizationMB.getAuthInstance().getUser();
         this.orders = OrderFacade.listUserOrders(user);
         this.reason = "Setar motivo...";
+        vestures = new ArrayList<Vesture>();
     }
     
 
@@ -39,6 +44,14 @@ public class MyOrderMB {
         getOrderById(id);
         //OrderFacade.deliverOrder(this.order);
         return "/orders/my_orders?faces-redirect=true";
+    }
+    
+    public void test(){
+        Vesture v = new Vesture();
+        v.setDays(3);
+        v.setDescription("Teste");
+        v.setPrice(new BigDecimal(200.0));
+        vestures.add(v);
     }
 
     public Order getOrder() {
@@ -67,5 +80,13 @@ public class MyOrderMB {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public List<Vesture> getVestures() {
+        return vestures;
+    }
+
+    public void setVestures(List<Vesture> vestures) {
+        this.vestures = vestures;
     }
 }

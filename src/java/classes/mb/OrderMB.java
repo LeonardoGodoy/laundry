@@ -2,7 +2,6 @@ package classes.mb;
 
 import classes.facade.OrderFacade;
 import classes.model.Order;
-import classes.model.User;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -39,11 +38,18 @@ public class OrderMB implements Serializable {
         return "/orders/show";
     }
     
-    public String take(Integer id) {
+    public String paid(Integer id) {
         getOrderById(id);
-        User user = AuthorizationMB.getAuthInstance().getUser();
         
-        //OrderFacade.takeOrder(order, user);
+        OrderFacade.paidOrder(order);
+        return "/orders/show";
+    }
+    
+    public String ready(Integer id) {
+        getOrderById(id);
+        
+        OrderFacade.readyOrder(order);
+        
         return "/orders/show";
     }
         
@@ -51,7 +57,7 @@ public class OrderMB implements Serializable {
         getOrderById(id);
         String reason = "Setar motivo...";
         
-        //OrderFacade.cancelOrder(this.order, reason);
+        OrderFacade.cancelOrder(order, reason);
         return "/orders/index?faces-redirect=true";
     }
 
@@ -98,6 +104,6 @@ public class OrderMB implements Serializable {
     }
 
     public void getOrderById(Integer id) {
-        //this.order = OrderFacade.findOrderById(id);
+        this.order = OrderFacade.findOrderById(id);
     }
 }

@@ -2,6 +2,7 @@ package classes.mb;
 
 import classes.facade.AddressFacade;
 import classes.facade.UserFacade;
+import classes.model.Address;
 import classes.model.City;
 import classes.model.User;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public class UserMB implements Serializable {
     
     private List<User> users;
     private User user;
+    private Address address;
     
     private Integer cityId;
     
@@ -23,11 +25,13 @@ public class UserMB implements Serializable {
      public void init(){
         this.users = UserFacade.listUser();
         this.user = new User();
-    }   
+        this.address = new Address();
+     }   
     
     public String save(){
-        //City city = AddressFacade.findCityById(cityId);
-        //this.user.getAddress().setCity(city);
+        City city = AddressFacade.findCityById(cityId);
+        this.address.setCity(city);
+        this.user.setAddress(this.address);
         UserFacade.createUser(this.user);
         
         return "/users/index?faces-redirect=true";
@@ -35,7 +39,11 @@ public class UserMB implements Serializable {
     
     public String saveCustomer(){
         user.setRole("customer");        
-
+        
+        City city = AddressFacade.findCityById(cityId);
+        this.address.setCity(city);
+        this.user.setAddress(this.address);
+        
         UserFacade.createUser(this.user);
         AuthorizationMB.getAuthInstance().setUser(this.user);
         
@@ -61,6 +69,14 @@ public class UserMB implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Integer getCityId() {

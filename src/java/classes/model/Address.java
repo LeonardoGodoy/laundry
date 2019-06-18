@@ -1,6 +1,7 @@
 
 package classes.model;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "tb_address")
 @SequenceGenerator(name = "sequence", sequenceName = "tb_address_id_seq")
-public class Address {
+public class Address implements Serializable {
     
     private Integer id;
     private String street;

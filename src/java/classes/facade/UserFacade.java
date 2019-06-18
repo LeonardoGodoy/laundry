@@ -6,6 +6,7 @@
 package classes.facade;
 
 import classes.HibernateUtil;
+import classes.model.Order;
 import classes.model.User;
 import java.util.List;
 import org.hibernate.Query;

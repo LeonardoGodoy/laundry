@@ -1,10 +1,6 @@
 package classes.mb;
 
-import classes.facade.AddressFacade;
-import classes.facade.OrderFacade;
 import classes.facade.UserFacade;
-import classes.model.Address;
-import classes.model.Order;
 import classes.model.User;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;

@@ -2,6 +2,25 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/web/orders/new.xhtml</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/model/City.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/web/users/show.xhtml</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/facade/AddressFacade.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/mb/UserMB.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/web/orders/index.xhtml</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/mb/AuthorizationMB.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/facade/UserFacade.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/laundry_database.sql</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/model/User.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/facade/OrderFacade.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/dao/DeliverySystemOrderDao.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/model/Order.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/mb/OrderMB.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/web/orders/my_orders.xhtml</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/web/orders/show.xhtml</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/mb/MyOrderMB.java</file>
+            <file>file:/Users/leonardogodoy/NetBeansProjects/Laundry/src/java/classes/mb/NewOrderMB.java</file>
+        </group>
     </open-files>
 </project-private>

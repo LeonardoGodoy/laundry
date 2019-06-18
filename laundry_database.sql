@@ -78,13 +78,14 @@ create table tb_order (
   status VARCHAR(256),
   created_at TIMESTAMP,
   payment_date TIMESTAMP,
+  external_reference VARCHAR(256),
   FOREIGN KEY (address_id) REFERENCES tb_address(id),
   FOREIGN KEY (user_id) REFERENCES tb_user(id)
 );
 
-insert into tb_order(address_id, user_id, price, dead_line, status, created_at, payment_date) values (3, 2, 200.00, now(), 'waiting', now(), now());
-insert into tb_order(address_id, user_id, price, dead_line, status, created_at, payment_date) values (3, 2, 200.00, now(), 'waiting', now(), now());
-insert into tb_order(address_id, user_id, price, dead_line, status, created_at, payment_date) values (4, 3, 300.00, now(), 'waiting', now(), now());
+insert into tb_order(address_id, user_id, price, dead_line, status, created_at, payment_date) values (3, 2, 200.00, now(), 'Aguardando', now(), now());
+insert into tb_order(address_id, user_id, price, dead_line, status, created_at, payment_date) values (3, 2, 200.00, now(), 'Aguardando', now(), now());
+insert into tb_order(address_id, user_id, price, dead_line, status, created_at, payment_date) values (4, 3, 300.00, now(), 'Aguardando', now(), now());
 
 create table tb_vesture (
   id SERIAL PRIMARY KEY,

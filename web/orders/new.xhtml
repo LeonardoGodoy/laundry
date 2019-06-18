@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <ui:define name="body">
+        <h1 class="themed-header">Nova Encomenda</h1>
+
+        <h:form class="ui form">
+            
+            <h:inputHidden id="vesture-ids"
+                           value="#{newOrderMB.ids}"
+                           a:data-id="vesture-ids"/>
+
+            <div class="ui horizontal divider">
+                Roupas
+            </div>
+            
+            <h:outputLabel value="Tipo de Roupa" for="vesture"/>
+            
+            <div class="fields">
+                <div class="four wide field">
+                    <h:selectOneMenu id="vesture" 
+                                     class="ui dropdown"
+                                     a:data-id="vesture-selector">
+                        <f:selectItem itemLabel="Selecione" itemValue="" />
+
+
+                        <c:forEach items="#{newOrderMB.vestures}" var="item">
+                             <f:selectItem 
+                                itemValue="#{item.id}" 
+                                itemLabel="#{item.description}" 
+                                a:data-price="#{item.price}"
+                                a:data-days="#{item.days}"/>   
+                        </c:forEach>
+                    </h:selectOneMenu>
+                </div>
+            
+                <div class="four wide field">
+                    <h:commandButton value="Adicionar peça" 
+                                     a:data-id="add-item"
+                                     action="#"
+                                     class="ui button">
+                        <f:ajax execute="@form" render="@none" />
+                    </h:commandButton>     
+                </div>
+            </div>            
+            
+            <br/>
+            
+            <h:dataTable id="vesture-table"
+                         a:data-id="vesture-table"
+                         
+                         var="vesture" 
+                         class="ui very basic celled table">                
+                <h:column>
+                    <f:facet name="header">Roupa</f:facet>#{vesture.description}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Dias Necessários</f:facet>#{vesture.days}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Preço</f:facet>#{vesture.price}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Ações</f:facet>
+                </h:column>
+            </h:dataTable>
+            
+            <div class="ui horizontal divider">
+                Endereço
+            </div>
+                                
+            <div class="field">
+                <h:outputLabel value="Estado" for="selectState" />
+                <h:selectOneMenu id="selectState"
+                    class="ui dropdown"
+                    value="#{addressMB.stateId}">
+
+                    <f:selectItem itemLabel="Selecione" itemValue=""/>
+
+                    <f:selectItems value="#{addressMB.states}"
+                        var="state"
+                        itemLabel="#{state.name}"
+                        itemValue="#{state.id}"/>
+
+                    <f:ajax event="change"
+                        execute="selectState"
+                        render="selectCity"
+                        listener="#{addressMB.fetchCities}" />
+                </h:selectOneMenu>
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Cidade" for="selectCity" />
+                <h:selectOneMenu id="selectCity"
+                    class="ui dropdown"
+                    value="#{newOrderMB.cityId}">
+
+                    <f:selectItem itemLabel="Selecione" itemValue=""/>
+
+                    <f:selectItems value="#{addressMB.cities}"
+                        var="city"
+                        itemLabel="#{city.name}"
+                        itemValue="#{city.id}"/>
+                </h:selectOneMenu>
+            </div>
+
+            <div class="field">
+                <h:outputLabel value="Rua" for="street" />
+                <h:inputText value="#{newOrderMB.address.street}" id="street" />
+            </div>
+            
+            <div class="field">
+                <h:outputLabel value="Número" for="number" />
+                <h:inputText value="#{newOrderMB.address.number}" id="number" />
+            </div>
+            
+            <br/>
+            <h:commandButton value="Salvar" action="#{newOrderMB.save}" class="ui blue button"/>
+        </h:form>
+        
+        <script>
+            
+            var $table = $("table[data-id='vesture-table'] tbody");
+            $table.html('');
+            
+            function updateVestures(){
+                var $rows = $("tbody[data-id='vesture-table'] tr ");
+                var $ids = $rows.map(function(i, a) { return a.dataset['id'].toString() });
+                var $days = $rows.map(function(i, a) { return parseInt($(a).children('.days').html().toString()) });
+                
+                var max = Math.max.apply(Math, $days.toArray());
+                
+                var date = new Date();
+                date.setDate(date.getDate() + max);
+                console.log(date);
+                
+                var $input = $("input[data-id='vesture-ids']");
+                
+                $input.val($ids.toArray());                
+            }
+            
+            $(document).on('click', '.remove', function(){
+                var $row = $(this).parents('tr');
+                $row.remove();
+                updateVestures();
+            });
+            
+            $("input[data-id='add-item']").on('click', function() {
+                console.log('vamo  nessa');
+                
+                var $select = $("select[data-id='vesture-selector']");
+                var $selected = $select.find(":selected");
+                var id = $selected.val();
+                
+                if(!id) { return }
+                
+                var $table = $("table[data-id='vesture-table']");
+                
+                var id = $selected.val();
+                var description = $selected.text(); 
+                var days = $selected.data('days'); 
+                var price = $selected.data('price'); 
+                var act = '<a href="#" class="cancel-order"> <i class="ui trash alternate outline red icon remove"></i></a>'; 
+                
+                var content = '<tr data-id="' + id+ '"> \n\
+                    <td>' + description + '</td>\n\
+                    <td class="days">' + days + '</td>\n\
+                    <td>' + price + '</td>\n\
+                    <td>' + act + '</td>\n\
+                    </tr>'
+                // $table.append(content);
+                $table.prepend(content);
+                updateVestures();
+            });
+           
+        </script>
+    </ui:define>
+</ui:composition>
